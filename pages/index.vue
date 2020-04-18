@@ -13,6 +13,7 @@
     >Add</v-btn>
     <grid
       :layout="layout"
+      :hadleDelete="hadleDelete"
     ></grid>
   </div>
 </template>
@@ -33,7 +34,7 @@ export default class Index extends Vue {
       //caculate no.of grid per row
       let grid = Math.ceil(12/this.column_no);
 
-      for(let i=0;i<this.column_no;i++){     
+      for(let i=0;i<this.column_no;i++){      
         let newColumn = {
           x:(Number(this.layout.length) % (12/grid))*grid,
           y:0,
@@ -44,6 +45,12 @@ export default class Index extends Vue {
         this.layout.push(newColumn)
       }
       this.column_no = null
+  }
+  public hadleDelete(item:any): void{
+    let findIndex = this.layout.findIndex((layout:any) => layout.i === item.i)
+    let tempLayout = this.layout
+    tempLayout.splice(findIndex,1)
+    this.layout = tempLayout
   }
 }
 </script>

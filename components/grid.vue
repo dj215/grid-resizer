@@ -10,7 +10,6 @@
       :vertical-compact="true"
       :margin="[10, 10]"
       :autoSize="true"
-      :responsive="true"
       :use-css-transforms="true"
     >
 
@@ -21,8 +20,21 @@
           :h="item.h"
           :i="item.i"
           :key="item.i">
+            <v-btn
+              @click="hadleDelete(item)"
+              style="height:15px;width:15px "
+              :max-width="15"
+              x-small
+            >
+              <v-icon
+                size="15"
+              >
+                delete
+              </v-icon>
+            </v-btn>
         </grid-item>
     </grid-layout>
+    <nuxt-link to="/custom">Custom DnD</nuxt-link>
   </div>
 </template>
 
@@ -38,7 +50,8 @@ import VueGridLayout from 'vue-grid-layout';
 export default class Grid extends Vue {
     @Prop({ type: Array, required: true })
         layout!: object[];
-    
+    @Prop({type: Function, required: true})
+        hadleDelete!: Function
     get layoutArr(): Array<object> {
         return this.layout
     }
